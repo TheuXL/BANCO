@@ -1,0 +1,10 @@
+<form (ngSubmit)="cadastrarTransacao()">
+    <input type="number" [(ngModel)]="valor" placeholder="Valor" name="valor" required>
+    <select [(ngModel)]="tipo" name="tipo">
+        <option value="receita">Receita</option>
+        <option value="despesa">Despesa</option>
+    </select>
+    <input type="text" [(ngModel)]="categoria" placeholder="Categoria" name="categoria" required>
+    <textarea [(ngModel)]="descricao" placeholder="Descrição" name="descricao"></textarea>
+    <button type="submit">Cadastrar</button>
+</form>
