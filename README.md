@@ -147,9 +147,13 @@ A API para gerenciar transações está disponível no seguinte endpoint:
 Se você deseja contribuir para este projeto, siga estas etapas:
 
 Faça um fork do repositório.
+
 Crie uma nova branch (git checkout -b feature/nome-da-sua-feature).
+
 Faça suas alterações e faça o commit (git commit -m 'Adicionando uma nova feature').
+
 Envie suas alterações (git push origin feature/nome-da-sua-feature).
+
 Abra um pull request.
 
 #### DESENVOLVIDO POR
