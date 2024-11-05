@@ -1,0 +1,38 @@
+/* Estilos do cabeçalho */
+.header {
+  background-color: #004d40;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.header nav button {
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  color: #004d40;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.header nav button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Estilos do conteúdo */
+.content {
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+/* Estilos do rodapé */
+.footer {
+  background-color: #004d40;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

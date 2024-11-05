@@ -1,11 +1,11 @@
-import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
+// src/app/app.config.server.ts
+import { ApplicationConfig } from '@angular/core';
 import { provideServerRendering } from '@angular/platform-server';
-import { appConfig } from './app.config';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
-const serverConfig: ApplicationConfig = {
+export const serverConfig: ApplicationConfig = {
   providers: [
-    provideServerRendering()
+    provideServerRendering(),
+    provideHttpClient(withFetch()) // Adiciona withFetch() para melhor compatibilidade com SSR
   ]
 };
-
-export const config = mergeApplicationConfig(appConfig, serverConfig);

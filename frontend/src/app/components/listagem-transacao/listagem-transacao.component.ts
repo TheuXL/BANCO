@@ -1,40 +1,49 @@
 // src/app/components/listagem-transacao/listagem-transacao.component.ts
-
-import { Component } from '@angular/core';
-import { Transacao } from '../../interfaces/transacao'; // Importando a interface Transacao
+import { Component, OnInit } from '@angular/core';
+import { TransacaoService } from '../../services/transacao.service';
+import { Transacao } from '../../interfaces/transacao';
 
 @Component({
   selector: 'app-listagem-transacao',
   templateUrl: './listagem-transacao.component.html',
-  styleUrls: ['./listagem-transacao.component.css']
+  styleUrls: ['./listagem-transacao.component.scss']
 })
-export class ListagemTransacaoComponent {
-  transacoes: Transacao[] = []; // Array para armazenar as transações
+export class ListagemTransacaoComponent implements OnInit {
+  transacoes: Transacao[] = [];
+  transacaoParaEditar: Transacao | null = null;
 
-  constructor() {
-    // Exemplo de inicialização de transações
-    this.transacoes = [
-      {
-        id: 1,
-        valor: 100,
-        descricao: 'Pagamento de serviço',
-        data: new Date('2024-10-01'), // Exemplo de data
-        tipo: 'credito'
-      },
-      {
-        id: 2,
-        valor: 50,
-        descricao: 'Compra de material',
-        data: new Date('2024-10-02'),
-        tipo: 'debito'
-      }
-    ];
+  constructor(private transacaoService: TransacaoService) {}
+
+  ngOnInit() {
+    this.loadTransacoes();
   }
 
-  // Método para adicionar uma nova transação (exemplo)
-  adicionarTransacao(transacao: Transacao) {
-    this.transacoes.push(transacao);
+  loadTransacoes() {
+    this.transacaoService.getTransacoes().subscribe(data => {
+      this.transacoes = data;
+    });
   }
 
-  // Outros métodos para manipulação de transações podem ser adicionados aqui
+  deleteTransacao(id: number) {
+    this.transacaoService.deleteTransacao(id).subscribe(() => {
+      this.loadTransacoes();
+    });
+  }
+
+  editTransacao(transacao: Transacao) {
+    this.transacaoParaEditar = { ...transacao }; // Cria uma cópia da transação para evitar modificações diretas
+  }
+
+  updateTransacao() {
+    if (this.transacaoParaEditar) {
+      this.transacaoService.updateTransacao(this.transacaoParaEditar).subscribe(() => {
+        this.loadTransacoes();
+        this.transacaoParaEditar = null; // Limpa o formulário de edição após a atualização
+      });
+    }
+  }
+
+  cancelarEdicao() {
+    this.transacaoParaEditar = null; // Cancela a edição e limpa o formulário
+  }
 }

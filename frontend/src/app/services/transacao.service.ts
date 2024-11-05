@@ -1,37 +1,34 @@
+// src/app/services/transacao.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-interface Transacao {
-    id?: number;
-    valor: number;
-    tipo: 'receita' | 'despesa';
-    categoria: string;
-    descricao?: string;
-    data?: Date;
-}
+import { Transacao } from '../interfaces/transacao';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class TransacaoService {
-    private apiUrl = 'http://localhost:8000/api/transacoes';
+  private apiUrl = 'http://127.0.0.1:8000/api/transacoes';
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-    getTransacoes(): Observable<Transacao[]> {
-        return this.http.get<Transacao[]>(this.apiUrl);
-    }
+  // Obter todas as transações
+  getTransacoes(): Observable<Transacao[]> {
+    return this.http.get<Transacao[]>(this.apiUrl);
+  }
 
-    addTransacao(transacao: Transacao): Observable<Transacao> {
-        return this.http.post<Transacao>(this.apiUrl, transacao);
-    }
+  // Criar uma nova transação
+  createTransacao(transacao: Transacao): Observable<Transacao> {
+    return this.http.post<Transacao>(this.apiUrl, transacao);
+  }
 
-    updateTransacao(id: number, transacao: Transacao): Observable<Transacao> {
-        return this.http.put<Transacao>(`${this.apiUrl}/${id}`, transacao);
-    }
+  // Atualizar uma transação existente
+  updateTransacao(transacao: Transacao): Observable<Transacao> {
+    return this.http.put<Transacao>(`${this.apiUrl}/${transacao.id}`, transacao);
+  }
 
-    deleteTransacao(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${id}`);
-    }
+  // Excluir uma transação
+  deleteTransacao(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

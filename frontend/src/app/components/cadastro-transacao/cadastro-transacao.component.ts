@@ -1,20 +1,33 @@
+// src/app/components/cadastro-transacao/cadastro-transacao.component.ts
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TransacaoService } from '../../services/transacao.service';
+import { Transacao } from '../../interfaces/transacao';
 
 @Component({
-    selector: 'app-cadastro-transacao',
-    templateUrl: './cadastro-transacao.component.html'
+  selector: 'app-cadastro-transacao',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './cadastro-transacao.component.html',
+  styleUrls: ['./cadastro-transacao.component.scss']
 })
 export class CadastroTransacaoComponent {
-    valor: number = 0;
-    tipo: 'receita' | 'despesa' = 'receita';
-    categoria: string = '';
-    descricao: string = '';
+  transacao: Transacao = {
+    tipo: 'receita',
+    valor: 0,
+    categoria: '',
+    descricao: '' // Nova propriedade para a descrição da transação
+  };
 
-    constructor(private transacaoService: TransacaoService) {}
+  constructor(private transacaoService: TransacaoService) {}
 
-    cadastrarTransacao() {
-        const transacao = { valor: this.valor, tipo: this.tipo, categoria: this.categoria, descricao: this.descricao };
-        this.transacaoService.addTransacao(transacao).subscribe();
+  submitForm() {
+    if (this.transacao.tipo === 'despesa') {
+      this.transacao.valor = -Math.abs(this.transacao.valor);
     }
+    this.transacaoService.createTransacao(this.transacao).subscribe(response => {
+      console.log('Transação criada:', response);
+      this.transacao = { tipo: 'receita', valor: 0, categoria: '', descricao: '' };
+    });
+  }
 }
