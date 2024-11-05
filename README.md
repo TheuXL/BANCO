@@ -117,8 +117,7 @@ Se você deseja contribuir para este projeto, siga estas etapas:
 4. Envie suas alterações (`git push origin feature/nome-da-sua-feature`).
 5. Abra um pull request.
 
-## Licença
+## DESENVOLVIDO POR 
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
-
-
+Matheus Santos Souza e Silva
+matheuss.devv@gmail.com
