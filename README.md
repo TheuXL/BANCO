@@ -28,12 +28,11 @@ O **Gerenciador de Transações** é uma aplicação que permite o registro, edi
 - **Frontend**: Angular CLI: 18.2.11 
 - **Banco de Dados**: MySQL 
 
-
 ## Pré-requisitos
 
 ESTOU USANDO 
 
-- PHP PHP 8.3.13
+- PHP 8.3.13
 - Composer
 - Node.js 18.20.4
 - Angular CLI: 18.2.11
@@ -107,17 +106,54 @@ O frontend estará acessível em `(http://localhost:4200)`.
 
 - Acesse o frontend no navegador e interaja com a aplicação para cadastrar, editar, excluir e listar suas transações financeiras.
 
-## Contribuição
+## API
+
+A API para gerenciar transações está disponível no seguinte endpoint:
+
+**URL**: `http://127.0.0.1:8000/api/transacoes`
+
+### Exemplos de Testes
+
+#### Usando Postman
+
+1. **Cadastrar uma nova transação (POST)**:
+   - **Método**: POST
+   - **URL**: `http://127.0.0.1:8000/api/transacoes`
+   - **Cabeçalhos**:
+     - Content-Type: application/json
+   - **Corpo** (JSON):
+     ```json
+     {
+       "descricao": "Pagamento de Aluguel",
+       "valor": 1200,
+       "tipo": "receita"
+     }
+     ```
+
+2. **Listar todas as transações (GET)**:
+   - **Método**: GET
+   - **URL**: `http://127.0.0.1:8000/api/transacoes`
+
+#### Usando cURL
+
+1. **Cadastrar uma nova transação (POST)**:
+   ```bash
+   curl -X POST http://127.0.0.1:8000/api/transacoes \
+   -H "Content-Type: application/json" \
+   -d '{"descricao": "Pagamento de Aluguel", "valor": 1200, "tipo": "receita"}'
+
+#### Contribuição
 
 Se você deseja contribuir para este projeto, siga estas etapas:
 
-1. Faça um fork do repositório.
-2. Crie uma nova branch (`git checkout -b feature/nome-da-sua-feature`).
-3. Faça suas alterações e faça o commit (`git commit -m 'Adicionando uma nova feature'`).
-4. Envie suas alterações (`git push origin feature/nome-da-sua-feature`).
-5. Abra um pull request.
+Faça um fork do repositório.
+Crie uma nova branch (git checkout -b feature/nome-da-sua-feature).
+Faça suas alterações e faça o commit (git commit -m 'Adicionando uma nova feature').
+Envie suas alterações (git push origin feature/nome-da-sua-feature).
+Abra um pull request.
 
-## DESENVOLVIDO POR 
+#### DESENVOLVIDO POR
 
 Matheus Santos Souza e Silva
 matheuss.devv@gmail.com
+
